@@ -5,17 +5,17 @@
   box-sizing: border-box;
 }
 
-#checkerboard {
+/*#checkerboard {
   width: auto; /* Adjust width as needed */
-  height: auto; /* Adjust height as needed */
-  background-size: 50% 50%;
+/*  height: auto; /* Adjust height as needed */
+/*  background-size: 50% 50%;
   background-image: 
       linear-gradient(45deg, #030303 25%, transparent 25%),
       linear-gradient(-45deg, #ffffff 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, #050505 75%),
       linear-gradient(-45deg, transparent 75%, #ffffff 75%);
   background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
-}
+} */
 
 nav{
   display: flex;
@@ -28,7 +28,7 @@ nav ul{
   text-align: center;
   text-decoration: none;
   background-color: #ebedf1;
-  color: #0c0a0a;
+  color: #070505;
   padding: 35px;
   display:flex;
   justify-content: space-around;
@@ -37,8 +37,8 @@ nav ul{
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #2d177e;
+  color: #6d2323;
 }
 
 /* Header styles */
@@ -70,13 +70,13 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #fffbfb;
+  color: #a73a3a;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 nav ul li a:hover {
-  color: #007bff;
+  color: #090d11;
 }
 
 /* Main content styles */
@@ -125,11 +125,10 @@ main {
 .hero-img{
   width: auto;
 }
-
-/*#home-grid{
+.home-grid{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-}*/
+}
 
 .upgrades-card-grid{
   display:grid;
@@ -182,6 +181,8 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+
 
 @media (max-width: 768px) {
   .container {
