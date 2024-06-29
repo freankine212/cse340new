@@ -37,6 +37,7 @@ nav ul{
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  background-image:url('/public/images/site/checkerboard.jpg');
   background-color: #2d177e;
   color: #6d2323;
 }

@@ -1,30 +1,38 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const express = require('express');
+const router = express.Router()
+const invController = require('../controllers/invController');
+const baseController = require('../controllers/baseController')
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  let list = "<ul>"
+  let list = "<ul id='navLinks'>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
     list += "<li>"
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>"
+    list += `
+    <a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">
+      ${row.classification_name}
+    </a>
+  `
     list += "</li>"
   })
   list += "</ul>"
   return list
 }
 
-module.exports = Util
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
 
 /* **************************************
 * Build the classification view HTML
@@ -58,3 +66,43 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+Util.buildDetailGrid = async function(data) {
+  let grid
+  grid = `
+  <div id="det-display">
+    <div id="det-img">
+      <img src="${data.inv_image}" alt="Image of ${data.inv_make} ${data.inv_model}">
+    </div>
+    <div id="det-details">
+      <h2 id="det-subtitle">${data.inv_year} ${data.inv_make} ${data.inv_model} Details</h2>
+      <span id="det-mileage">Mileage: ${data.inv_miles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
+      <span id="det-color">Color: ${data.inv_color.charAt(0).toUpperCase()}${data.inv_color.slice(1).toLowerCase()}</span>
+      <p id="det-description">Description: ${data.inv_description}</p>
+      <span id="det-price">$${new Intl.NumberFormat('en-US').format(data.inv_price)}</span>
+    </div>
+  </div>
+  `
+  return grid
+}
+
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList = '<label class="add-inventory-label">Classification'
+  classificationList += '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  classificationList += "</label>"
+  return classificationList
+}
+
+module.exports = Util
