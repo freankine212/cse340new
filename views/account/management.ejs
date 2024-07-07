@@ -1,0 +1,21 @@
+<% if (title) { %>
+    <h1 id="account-manag-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div id='manag-display'>
+    <a href="/inv/add-classification">Add new classification</a>
+    <a href="/inv/add-inventory">Add new vehicle</a>
+  </div>
+
+<script src='/js/script.js'></script>

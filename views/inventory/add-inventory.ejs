@@ -1,0 +1,58 @@
+<% if (title) { %>
+    <h1 id='add-inventory-title'><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div id="add-inventory-display">
+    <form id="addInventory" action="/inv/add-inventory" method="post">
+        <%- classificationList %>
+        
+        <label class="add-inventory-label">Make
+            <input type="text" name="inv_make" required value="<%= locals.inv_make %>">
+        </label>
+    
+        <label class="add-inventory-label">Model
+            <input type="text" name="inv_model" required value="<%= locals.inv_model %>">
+        </label>
+    
+        <label class="add-inventory-label">Year
+            <input type="text" name="inv_year" required pattern="\d{4}" title="Please enter a valid 4-digit year" inputmode="numeric" value="<%= locals.inv_year %>">
+        </label>
+    
+        <label class="add-inventory-label">Description
+            <input type="text" name="inv_description" required value="<%= locals.inv_description %>">
+        </label>
+    
+        <label class="add-inventory-label">Image
+            <input type="text" name="inv_image" required value="<%= locals.inv_image %>">
+        </label>
+    
+        <label class="add-inventory-label">Thumbnail
+            <input type="text" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
+        </label>
+    
+        <label class="add-inventory-label">Price
+            <input type="number" name="inv_price" required pattern="\d+" title="Please enter a valid price" inputmode="numeric" value="<%= locals.inv_price %>">
+        </label>
+    
+        <label class="add-inventory-label">Miles
+            <input type="number" name="inv_miles" required pattern="\d+" title="Please enter a valid mileage" inputmode="numeric" value="<%= locals.inv_miles %>">
+        </label>
+    
+        <label class="add-inventory-label">Color
+            <input type="text" name="inv_color" required value="<%= locals.inv_color %>">
+        </label>
+    
+        <button type="submit">Add Vehicle to Inventory</button>
+    </form>
+</div>
+<script src='/js/script.js'></script>

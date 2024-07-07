@@ -2,7 +2,7 @@ const invModel = require("../models/inventory-model")
 const Util = {}
 const express = require('express');
 const router = express.Router()
-const invController = require('../controllers/invController');
+const invController = require('../controllers/invController')
 const baseController = require('../controllers/baseController')
 
 /* ************************
@@ -66,6 +66,7 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
 Util.buildDetailGrid = async function(data) {
   let grid
   grid = `
@@ -87,8 +88,8 @@ Util.buildDetailGrid = async function(data) {
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications()
-  let classificationList = '<label class="add-inventory-label">Classification'
-  classificationList += '<select name="classification_id" id="classificationList" required>'
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
   classificationList += "<option value=''>Choose a Classification</option>"
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'
@@ -101,8 +102,8 @@ Util.buildClassificationList = async function (classification_id = null) {
     classificationList += ">" + row.classification_name + "</option>"
   })
   classificationList += "</select>"
-  classificationList += "</label>"
   return classificationList
 }
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 module.exports = Util

@@ -37,7 +37,6 @@ nav ul{
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-image:url('/public/images/site/checkerboard.jpg');
   background-color: #2d177e;
   color: #6d2323;
   
@@ -186,12 +185,83 @@ footer {
 
 
 
-@media (max-width: 768px) {
-  .container {
-      width: 90%;
+@media screen and (min-width: 550px) {
+  body {
+    background-image: url('/images/site/checkerboard.jpg');
+    margin: 3rem 2%;
+    border: 4px solid yellow;
+    border-radius: 15px;
   }
-
-  header h1 {
-      font-size: 2em;
+  #wrapper {
+    background-color: white;
+    padding: .1rem 1rem;
+  }
+  #hamburgerBtn {display: none;}
+  #navLinks {display: flex;}
+  #call-to-action {
+    left: 13%;
+  }
+  #wrapper-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  #upgrades {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-column: 1;
+    grid-row: 1;
+    align-items: center;
+  }
+  #reviews {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  /* ---------- INVENTORY ---------- */
+  #inv-display {
+    grid-template-columns: 200px 200px;
+    justify-content: center;
+    column-gap: 3rem;
+  }
+  /* ---------- DETAIL ---------- */
+  #det-display {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    justify-content: center;
+    column-gap: 2rem;
+  }
+  /* ---------- LOGIN ---------- */
+  #login-display, #register-display {
+    width: 350px;
+  }
+  /* ---------- INV MANAGEMENT ---------- */
+  #manag-display, #add-classification-display, #add-inventory-display, #edit-inventory-display, #delete-inventory-display, #account-display, #update-display, #update-manag-display, #delete-manag-display  {
+    width: 350px;
+  }
+  #accountTable {width: 450px;}
+  /* ---------- MESSAGES --------- */
+  ul.notice, ul.sucess {
+    width: 350px;
+  }
+}
+@media screen and (min-width: 968px) {
+  #inv-display {
+    grid-template-columns: repeat(3, 200px);
+  }
+  #det-display {
+    grid-template-columns: 450px 1fr;
+    column-gap: 5rem;
+  }
+  #login-display, #register-display {
+    width: 450px;
+  }
+  #manag-display, #add-classification-display, #add-inventory-display, #edit-inventory-display, #delete-inventory-display, #account-display, #update-display, #update-manag-display, #delete-manag-display  {
+    width: 450px;
+  }
+  #accountTable{
+    width: 650px;
+  }
+  ul.notice, ul.success {
+    width: 450px;
   }
 }

@@ -1,0 +1,29 @@
+<% if (title) { %>
+    <h1 id="login-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div id="login-display">
+  <form id="loginForm" action="/account/login" method="post">
+    <label class="login-label">Email
+      <input type="email" name="account_email" placeholder="email@example.com" required>
+    </label>
+    
+    <label class="login-label">Password
+      <input type="password" name="account_password" placeholder="Password" required>
+    </label>
+    
+    <button type="submit">Login</button>
+  </form>
+  <a href="/account/register">Not a member yet? Click here to join</a>
+  </div>
+<script src='/js/script.js'></script>
