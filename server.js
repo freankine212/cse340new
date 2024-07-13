@@ -16,6 +16,7 @@ const pool = require('./database/')
 const path = require ('path')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
+const cookieParser = require("cookie-parser")
 
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
@@ -55,6 +56,9 @@ app.use(function(req, res, next){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) //for parsing application
 
+// cookie-parser
+app.use(cookieParser())
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -87,7 +91,8 @@ app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, it seems like we lost this page :('})
 })
 
-
+//jwtoken
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Local Server Information

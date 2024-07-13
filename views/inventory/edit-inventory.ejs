@@ -1,0 +1,62 @@
+<% if (title) { %>
+    <h1 id='edit-inventory-title'><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div id="edit-inventory-display">
+    <form id="editInventory" action="/inv/update" method="post">
+        <%- classificationList %>
+        
+        <label class="edit-inventory-label">Make
+            <input type="text" name="inv_make" required value="<%= locals.inv_make %>">
+        </label>
+    
+        <label class="edit-inventory-label">Model
+            <input type="text" name="inv_model" required value="<%= locals.inv_model %>">
+        </label>
+    
+        <label class="edit-inventory-label">Year
+            <input type="text" name="inv_year" required pattern="\d{4}" title="Please enter a valid 4-digit year" inputmode="numeric" value="<%= locals.inv_year %>">
+        </label>
+    
+        <label class="edit-inventory-label">Description
+            <input type="text" name="inv_description" required value="<%= locals.inv_description %>">
+        </label>
+    
+        <label class="edit-inventory-label">Image
+            <input type="text" name="inv_image" required value="<%= locals.inv_image %>">
+        </label>
+    
+        <label class="edit-inventory-label">Thumbnail
+            <input type="text" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
+        </label>
+    
+        <label class="edit-inventory-label">Price
+            <input type="number" name="inv_price" required pattern="\d+" title="Please enter a valid price" inputmode="numeric" value="<%= locals.inv_price %>">
+        </label>
+    
+        <label class="edit-inventory-label">Miles
+            <input type="number" name="inv_miles" required pattern="\d+" title="Please enter a valid mileage" inputmode="numeric" value="<%= locals.inv_miles %>">
+        </label>
+    
+        <label class="edit-inventory-label">Color
+            <input type="text" name="inv_color" required value="<%= locals.inv_color %>">
+        </label>
+    
+        <button type="submit" disabled>Edit Vehicle</button>
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </form>
+</div>
+<script src="/js/inv-update.js"></script>
+<script src='/js/script.js'></script>

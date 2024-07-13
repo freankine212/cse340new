@@ -1,0 +1,34 @@
+<% if (title) { %>
+    <h1 id="delete-manag-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div id="delete-manag-display">
+    <form action="/account/management/delete-account" method="post">
+        <label class="update-label">First name
+        <input type="text" name="account_firstname" required value="<%= data.account_firstname %>" readonly>
+        </label>
+        
+        <label class="update-label">Last name
+        <input type="text" name="account_lastname" required value="<%= data.account_lastname %>" readonly>
+        </label>
+
+        <label class="update-label">Email  
+        <input type="email" name="account_email" placeholder="email@example.com" required value="<%= data.account_email %>" readonly>
+        </label>
+
+        <input type="hidden" name="account_id"
+        <% if(data.account_id) { %> value="<%= data.account_id %>"
+        <% } %>>
+        <button type="submit">Delete Account</button>
+    </form>
+  </div>

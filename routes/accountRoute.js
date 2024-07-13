@@ -30,8 +30,9 @@ router.post(
 router.get("/", (req, res) => {
  utilities.checkLogin,
  utilities.handleErrors(controller.buildAccount)})
- router.get("/update", utilities.handleErrors(controller.buildUpdate))
- router.post("/update-account-info",
+
+router.get("/update", utilities.handleErrors(controller.buildUpdate))
+router.post("/update-account-info",
   accountValidate.updateBasicInfoRules(),
   accountValidate.checkBasicInfoData,
   utilities.handleErrors(controller.updateAccount)
@@ -83,6 +84,15 @@ async function buildLogin(req, res, next) {
       nav,
     })
   }
+
+//Process the login request
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 
 /* ****************************************
 *  Deliver registration view

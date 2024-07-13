@@ -1,0 +1,40 @@
+<% if (title) { %>
+    <h1 id='delete-inventory-title'><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div id="delete-inventory-display">
+    <form id="deleteInventory" action="/inv/delete" method="post">
+
+        <label class="delete-inventory-label">Make
+            <input type="text" name="inv_make" required value="<%= locals.inv_make %>" readonly>
+        </label>
+    
+        <label class="delete-inventory-label">Model
+            <input type="text" name="inv_model" required value="<%= locals.inv_model %>" readonly>
+        </label>
+    
+        <label class="delete-inventory-label">Year
+            <input type="text" name="inv_year" required pattern="\d{4}" title="Please enter a valid 4-digit year" inputmode="numeric" value="<%= locals.inv_year %>" readonly>
+        </label>
+
+        <label class="delete-inventory-label">Price
+            <input type="number" name="inv_price" required pattern="\d+" title="Please enter a valid price" inputmode="numeric" value="<%= locals.inv_price %>" readonly>
+        </label>
+    
+        <button type="submit">Delete Vehicle</button>
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </form>
+</div>
+<script src='/js/script.js'></script>
