@@ -69,4 +69,23 @@ async function updatePassword( account_id, hashedPassword) {
     console.error("Update Account Error:", error);
   }
 }
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword };
+
+async function getAllAccounts () {
+  try {
+    const result = await pool.query('SELECT account_id, account_firstname, account_lastname, account_email FROM public.account');
+    return result.rows; // Extract the rows from the query result
+  } catch (error) {
+    throw new Error("Error retrieving accounts");
+  }
+}
+async function deleteAccount(account_id) {
+  try {
+    const sql =
+      "DELETE FROM public.account WHERE account_id = $1"
+    const data = await pool.query(sql, [account_id])
+    return data
+  } catch (error) {
+    console.error("Delete Account Error: " + error)
+  }
+}
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword, getAllAccounts, deleteAccount };

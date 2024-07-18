@@ -93,6 +93,37 @@ const utilities = require(".")
       return
     }
     next()
-  }
+}
 
+validate.checkUpdateData = async (req, res, next) => {
+  const inventoryId = parseInt(req.body.inv_id);
+  const itemData = await InventoryModel.getInventoryByInventoryId(inventoryId)
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList()
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+    res.render("./inventory/edit-inventory", {
+      errors,
+      title: `Edit ${itemName}`,
+      nav,
+      classificationList,
+      errors: null,
+      inv_id: itemData.inv_id,
+      inv_make: itemData.inv_make,
+      inv_model: itemData.inv_model,
+      inv_year: itemData.inv_year,
+      inv_description: itemData.inv_description,
+      inv_image: itemData.inv_image,
+      inv_thumbnail: itemData.inv_thumbnail,
+      inv_price: itemData.inv_price,
+      inv_miles: itemData.inv_miles,
+      inv_color: itemData.inv_color,
+      classification_id: itemData.classification_id
+    })
+    return
+}
+next()
+}
   module.exports = validate
